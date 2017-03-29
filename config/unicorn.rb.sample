@@ -1,0 +1,11 @@
+worker_processes 2
+
+working_directory "APP_PATH"
+
+listen "/tmp/unicorn.rails5.sock"
+timeout 30
+
+pid "tmp/unicorn.rails5.pid"
+
+stderr_path "log/unicorn.log"
+stdout_path "log/unicorn.log"

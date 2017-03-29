@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+  <div class="panel-heading">图片列表</div>
+  <table class="table">
+    <tr>
+      <th>缩略图</th>
+      <th>图片URL</th>
+      <% if can? :delete, picture %>
+      <th>操作</th>
+      <% end %>
+    </tr>
+    <tr>
+      <td>
+        <img class="upload_picture" src="<%= picture.image[0].url %>" width = "60" height = "30" alt="图片名称" align=center />
+      </td>
+      <td>
+        <%= image_url_copy(picture) %>
+      </td>
+      <% if can? :delete, picture %>
+      <td>
+        <%= link_to I18n.t("common.delete"), picture_path(picture), method: 'DELETE', data: {confirm: I18n.t("common.confirm")}, class: "btn btn-sm btn-danger" %>
+      </td>
+      <% end %>
+    </tr>
+  </table>
+</div>
+
+<script type="text/javascript">
+  var clipboard = new Clipboard(".btn");
+
+  clipboard.on("success", function(e){
+    console.info("Action :", e.action);
+    console.info("Test :", e.text);
+    console.info("Trigger :", e.trigger);
+
+    e.clearSelection();
+  });
+
+  clipboard.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
+  });
+</script>

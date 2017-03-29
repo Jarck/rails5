@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-9">
+    <div class="pictures panel panel-default">
+        <div class="panel-body">
+          <table>
+            <% if @topics.blank? %>
+              <p>
+                <span><%= I18n.t("common.empty_picture") %></span>
+              </p>
+            <% else %>
+              <% cache(['pictures', @pictures]) do %>
+                <%= render @pictures %>
+              <% end %>
+            <% end %>
+        </div>
+        <div class="panel-footer clearfix">
+          <%= will_paginate @pictures %>
+        </div>
+    </div>
+  </div>
+</div>
