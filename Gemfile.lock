@@ -191,7 +191,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   cancancan
-  carrierwave
+  carrierwave (~> 1.0)
   coderay
   coffee-rails (~> 4.2)
   devise

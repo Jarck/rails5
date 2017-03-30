@@ -48,7 +48,7 @@ gem 'redcarpet'
 gem 'coderay'
 
 # 上传图片
-gem 'carrierwave'
+gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 
 # 分页
