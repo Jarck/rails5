@@ -59,6 +59,7 @@ gem 'redis-objects'
 
 # Use Unicorn as the app server
 gem "unicorn"
+gem "mina-unicorn", :require => false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
