@@ -15,8 +15,8 @@
           <% end %>
           <% if can? :destroy, topic %>
             <%= link_to I18n.t("common.delete"), topic_path(topic), method: 'DELETE', data: {confirm: I18n.t("common.confirm")}, class: "btn btn-sm btn-danger" %>
-          </div>
           <% end %>
+          </div>
         </div>
       </div>
     </div>

@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  require 'sidekiq/web'
+  authenticate :user, ->(u) { u.has_role? :admin} do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   # 文章
   resources :topics
 

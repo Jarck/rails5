@@ -4,6 +4,11 @@ body {
   font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+abbr[title] {
+  border-bottom: 0px !important;
+  cursor: pointer !important;
+}
+
 .left {
   float: left;
 }
@@ -12,11 +17,10 @@ body {
   float: right;
 }
 
+
 .pagination {
   margin: 0;
 }
-
-abbr[title] { border-bottom: 0px; cursor: text; }
 
 .topics .topic {
   border-bottom: 1px solid #F0F0F0;

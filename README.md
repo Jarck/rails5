@@ -1,24 +1,35 @@
-# README
+# rails360
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+网站：[rails360](rails360.com:8080)
 
-Things you may want to cover:
+### 依赖
 
-* Ruby version
+* rails 5.0
+* ruby 2.4
+* mysql 5.7
+* redis
+* imagemagick 
 
-* System dependencies
+### 运行
 
-* Configuration
+mysql、redis服务必须先启动好。
 
-* Database creation
+```
+bundle install
+rake db:create
+rake db:migrate
+rake db:seed
+rails s
+```
 
-* Database initialization
+### 测试
 
-* How to run the test suite
+```
+bundle exec rspec
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### TODO
 
-* Deployment instructions
-
+* 优化管理页面
+* 添加全文检索功能
 * ...

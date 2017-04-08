@@ -28,7 +28,7 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -53,30 +53,25 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: Setting.domain, port: Setting.port }
 
-  # config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :smtp
 
   # # Show full error reports and disable caching.
   # config.consider_all_requests_local       = true
   # config.action_controller.perform_caching = false
 
-  # 阿里企业邮箱配置
+  # 发送邮箱配置
   config.action_mailer.smtp_settings = {
-    :address => "smtp.mxhichina.com",
-    :port => 587,
-    :domain => "qiye.aliyun.com/alimail",
-    :user_name => "your@yesqin.com",
-    :password => "password",
+    :address => Setting.email_address,
+    :port    => Setting.email_port,
+    :domain  => Setting.email_domain,
+    :user_name => Setting.email_sender,
+    :password  => Setting.email_password,
     :authentication => :plain,
     :enable_starttls_auto => true
   }
   config.action_mailer.default :charset => "utf-8"
 
-  config.action_dispatch.best_standards_support = :builtin
-
-  config.active_support.deprecation = :notify
-  config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
 end

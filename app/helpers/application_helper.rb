@@ -1,6 +1,13 @@
 module ApplicationHelper
 
+  ALLOW_TAGS = %W(string em b i p code pre tt br div span h1 h2 h3 h4 h5 h6 u ul ol
+                  li dl dt dd abbr a img blockquote del table tr td tbody th strike hr)
+  ALLOW_ATTRIBUTES = %w(href src width height title class name abbr id alt target rel data-floor)
   EMPTY_STRING = ''.freeze
+
+  def sanitize_markdown(body)
+    sanitize(body, tags: ALLOW_TAGS, attributes: ALLOW_ATTRIBUTES)
+  end
 
   # Override cache helper for support multiple I18n locale
   def cache(name = {}, options = {}, &block)

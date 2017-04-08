@@ -24,6 +24,7 @@
     topic_list: "文章列表"
     node_list: "文章分类"
     create_topic: "发布文章"
+    edit_topic: "编辑文章"
     editor_toolbar_edit: "编辑"
     editor_toolbar_preview: "预览"
     created_at: "于 %{time}发布"
@@ -35,3 +36,10 @@
     picture_list: "图片列表"
     confirm: "确认删除？"
     read_times: "次阅读"
+  mail:
+    this_is_a_notification_mail_please_do_not_reply: "这是一封提醒邮件，请勿直接通过邮件回复。"
+    login_from: "登录页面地址 "
+    welcome_subject: "欢迎注册 %{app_name} "
+    welcome_to: "欢迎加入 %{app_name} "
+    you_have_successfully: "你已经成功在 "
+    registered_an_account: "注册了账号。"

@@ -16,6 +16,14 @@ module Rails5
     config.i18n.available_locales = ['zh-CN', 'en']
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [:password, :token]
+
+    config.active_job.queue_adapter = :sidekiq
+
+    config.generators do |g|
+      g.test_framework :rspec
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
+    end
+
   end
 end

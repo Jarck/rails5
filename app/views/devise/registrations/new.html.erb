@@ -1,8 +1,9 @@
-
 <div class="row">
   <div class="col-md-5 col-md-offset-2">
     <div class="panel panel-default">
-      <div class="panel-heading"><%= t("common.register") %></div>
+      <div class="panel-heading">
+        <strong><%= t("common.register") %></strong>
+      </div>
       <div class="panel-body">
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= devise_error_messages! %>

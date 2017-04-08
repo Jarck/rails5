@@ -23,7 +23,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
@@ -84,22 +84,21 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # 阿里企业邮箱配置
+  config.active_support.deprecation = :log
+  config.action_mailer.delivery_method = :smtp
+
+  # 发送邮箱配置
   config.action_mailer.smtp_settings = {
-    :address => "smtp.mxhichina.com",
-    :port => 587,
-    :domain => "qiye.aliyun.com/alimail",
-    :user_name => "your@yesqin.com",
-    :password => "password",
+    :address => Setting.email_address,
+    :port    => Setting.email_port,
+    :domain  => Setting.email_domain,
+    :user_name => Setting.email_sender,
+    :password  => Setting.email_password,
     :authentication => :plain,
     :enable_starttls_auto => true
   }
   config.action_mailer.default :charset => "utf-8"
 
-  config.action_dispatch.best_standards_support = :builtin
-
-  config.active_support.deprecation = :notify
-  config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 end

@@ -1,88 +1,101 @@
 #!/bin/sh
+set -e
 ### BEGIN INIT INFO
 # Provides:          unicorn
-# Required-Start:    $remote_fs $syslog
-# Required-Stop:     $remote_fs $syslog
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs $network
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Manage unicorn server
-# Description:       Start, stop, restart unicorn server for a specific application.
+# Short-Description: Start/stop unicorn Rack app server
 ### END INIT INFO
-set -e
 
 # Feel free to change any of the following variables for your app:
 TIMEOUT=${TIMEOUT-60}
 
 APP_ROOT=$APP_ROOT
-PID=$APP_ROOT/tmp/unicorn.rails5_mina.pid
+PID=$APP_ROOT/tmp/unicorn.rails5.pid
 # CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
-CMD="cd $APP_ROOT; bundle exec unicorn_rails -D -c $APP_ROOT/config/unicorn.rb -E production"
-# CMD="cd $APP_ROOT; bundle exec unicorn_rails -D -c $APP_ROOT/config/unicorn.rb"
-AS_USER=jarck
+#CMD="cd $APP_ROOT; bundle exec unicorn_rails -D -c $APP_ROOT/config/unicorn.rb -E production"
+CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb"
+AS_USER=USER
 
 set -u
 
-OLD_PIN="$PID.oldbin"
+test -f "$INIT_CONF" && . $INIT_CONF
+
+OLD="$PID.oldbin"
+
+cd $APP_ROOT || exit 1
 
 sig () {
-	test -s "$PID" && kill -$1 `cat $PID`
+	test -s "$PID" && kill -$1 $(cat $PID)
 }
 
 oldsig () {
-	test -s $OLD_PIN && kill -$1 `cat $OLD_PIN`
+	test -s "$OLD" && kill -$1 $(cat $OLD)
 }
 
-run () {
-	if [ "$(id -un)" = "$AS_USER" ]; then
-		eval $1
-	else
-		su -c "$1" - $AS_USER
-	fi
-}
-
-case "$1" in
-	start)
-		sig 0 && echo >&2 "Already running" && exit 0
-		run "$CMD"
-		;;
-	stop)
-		sig QUIT && exit 0
-		echo >&2 "Not running"
-		;;
-	force-stop)
-		sig TERM && exit 0
-		echo >&2 "Not running"
-		;;
-	restart|reload)
-		sig HUP && echo reloaded OK && exit 0
-		echo >&2 "Couldn't reload, starting '$CMD' instead"
-		run "$CMD"
-		;;
-	upgrade)
-		if sig USR2 && sleep 2 && sig 0 && oldsig QUIT
-		then
-			n=$TIMEOUT
-			while test -s $OLD_PIN && test $n -ge 0
-			do
-				printf '.' && sleep 1 && n=$(( $n - 1 ))
-			done
-			echo
-
-			if test $n -lt 0 && test -s $OLD_PIN
-			then
-				echo >&2 "$OLD_PIN still exists after $TIMEOUT seconds"
-				exit 1
-			fi
-			exit 0
-		fi
-		echo >&2 "Couldn't upgrade, starting '$CMD' instead"
-		run "$CMD"
-		;;
-	reopen-logs)
-		sig USR1
-		;;
-	*)
-		echo >&2 "Usage: $0 <start|stop|restart|upgrade|force-stop|reopen-logs>"
+case $action in
+start)
+	sig 0 && echo >&2 "Already running" && exit 0
+	$CMD
+	;;
+stop)
+	sig QUIT && exit 0
+	echo >&2 "Not running"
+	;;
+force-stop)
+	sig TERM && exit 0
+	echo >&2 "Not running"
+	;;
+restart|reload)
+	sig HUP && echo reloaded OK && exit 0
+	echo >&2 "Couldn't reload, starting '$CMD' instead"
+	$CMD
+	;;
+upgrade)
+	if oldsig 0
+	then
+		echo >&2 "Old upgraded process still running with $OLD"
 		exit 1
-		;;
+	fi
+
+	cur_pid=
+	if test -s "$PID"
+	then
+		cur_pid=$(cat $PID)
+	fi
+
+	if test -n "$cur_pid" &&
+			kill -USR2 "$cur_pid" &&
+			sleep $UPGRADE_DELAY &&
+			new_pid=$(cat $PID) &&
+			test x"$new_pid" != x"$cur_pid" &&
+			kill -0 "$new_pid" &&
+			kill -QUIT "$cur_pid"
+	then
+		n=$TIMEOUT
+		while kill -0 "$cur_pid" 2>/dev/null && test $n -ge 0
+		do
+			printf '.' && sleep 1 && n=$(( $n - 1 ))
+		done
+		echo
+
+		if test $n -lt 0 && kill -0 "$cur_pid" 2>/dev/null
+		then
+			echo >&2 "$cur_pid still running after $TIMEOUT seconds"
+			exit 1
+		fi
+		exit 0
+	fi
+	echo >&2 "Couldn't upgrade, starting '$CMD' instead"
+	$CMD
+	;;
+reopen-logs)
+	sig USR1
+	;;
+*)
+	echo >&2 "Usage: $0 <start|stop|restart|upgrade|force-stop|reopen-logs>"
+	exit 1
+	;;
 esac

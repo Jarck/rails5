@@ -48,22 +48,44 @@ gem 'redcarpet'
 gem 'coderay'
 
 # 上传图片
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave'
 gem 'mini_magick'
 
 # 分页
 gem 'will_paginate'
 
+# Redis 命名空间
+gem 'redis-namespace'
+
 # Redis 保存阅读量
 gem 'redis-objects'
 
+# 队列
+gem 'mina-sidekiq', :require => false
+gem 'sidekiq'
+# Sidekiq Web
+gem 'sinatra', require: nil
+
 # Use Unicorn as the app server
-gem "unicorn"
 gem "mina-unicorn", :require => false
+gem "unicorn"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+
+  gem 'rspec-rails', '~> 3.5.2'
+  gem 'rails-controller-testing'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+
+  gem 'database_cleaner'
 end
 
 group :development do

@@ -3,18 +3,24 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable#,
+         :recoverable, :rememberable, :trackable, :validatable
+         # :confirmable
          # :encryptable
 
   has_many :roles, :through => :users_roles
   has_many :topics
   has_many :pictures
 
-  # 注册邮件提醒
-  # after_create :send_welcome_mail
-  # def send_welcome_mail
-  #   UserMailer.welcome(id).deliver_later
-  # end
+  ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
+  validates :name, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },
+                    length: { in: 3..20 }, presence: true,
+                    uniqueness: { case_sensitive: true}
+
+  # 发送欢迎邮件
+  after_create :send_welcome_mail
+  def send_welcome_mail
+    UserMailer.welcome(id).deliver_later
+  end
 
   # 分配默认角色
   after_create :assign_default_role
@@ -38,6 +44,10 @@ class User < ApplicationRecord
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_h).first
     end
+  end
+
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
   end
 
 end

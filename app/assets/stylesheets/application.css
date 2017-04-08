@@ -12,12 +12,11 @@
  *
  *= require_tree .
  *= require_self
- *= require bootstrap.min
- *= require bootstrap-select.min
- *= require font-awesome.min
+ *= require css/bootstrap.min
+ *= require dist/css/bootstrap-select.min
+ *= require css/font-awesome.min
  *= require common
  *= require markdown
  */
-
 
 /* Bootstrap Theme */

@@ -14,8 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require bootstrap.min
-//= require bootstrap-select.min
+//= require js/bootstrap.min
+//= require dist/js/bootstrap-select.min
 //= require jquery.timeago
 //= require jquery.timeago.settings
 //= require clipboard.min
