@@ -1,8 +1,16 @@
-class PicturesController < ApplicationController
+class Admin::PicturesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @pictures = Picture.paginate(page: params[:page], :per_page => 10).order('created_at DESC')
+    if current_user.has_role?(:admin)
+      # 获取全部的图片
+      @pictures = Picture.paginate(page: params[:page], :per_page => 10).order('created_at DESC')
+    else
+      # 仅获取当前用户的文章
+      user_id = current_user.id
+      @topics = Picture.includes(:node).where("user_id in (:user_id)", user_id: user_id)
+                  .paginate(page: params[:page], :per_page => 10).order('created_at DESC')
+    end
   end
 
   def new
@@ -27,7 +35,7 @@ class PicturesController < ApplicationController
     end
 
     if Picture.create(save_images)
-      redirect_to(pictures_path, notice: I18n.t('common.create_success'))
+      redirect_to(admin_pictures_path, notice: I18n.t('common.create_success'))
     else
       render action: 'new'
     end
@@ -36,7 +44,7 @@ class PicturesController < ApplicationController
   def destroy
     @picture = Picture.find(params[:id])
     @picture.destroy
-    redirect_to(pictures_path, notice: t('common.delete_success'))
+    redirect_to(admin_pictures_path, notice: t('common.delete_success'))
   end
 
   private

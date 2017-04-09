@@ -1,4 +1,4 @@
-<%= simple_form_for @topic, html: { class: "form form-horizontal" } do |f| %>
+<%= simple_form_for [:admin, @topic], html: { class: "form form-horizontal" } do |f| %>
   <%= render "common/error_messages", target: @topic %>
   <div class="form-group">
     <div class="col-md-4">

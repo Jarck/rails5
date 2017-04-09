@@ -21,6 +21,7 @@
     email: "Email"
     name: "用户名"
     password: "密码"
+    admin_control: "控制台"
     topic_list: "文章列表"
     node_list: "文章分类"
     create_topic: "发布文章"

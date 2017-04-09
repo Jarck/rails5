@@ -30,10 +30,6 @@
                 <% end %>
                 </ul>
               </li>
-
-              <% if current_user %>
-              <li><%= link_to(I18n.t("common.picture_list"), pictures_path) %></li>
-              <% end %>
             </ul>
 
             <%= render "common/user_nav" %>

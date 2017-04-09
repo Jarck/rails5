@@ -13,11 +13,17 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  # 文章
-  resources :topics
+  # 控制台
+  namespace :admin do
+    # 文章
+    resources :topics
 
-  # 图片
-  resources :pictures
+    # 图片
+    resources :pictures
+  end
+
+  # 文章
+  resources :topics, only: [:index, :show]
 
   resources :nodes, only: [:show]
 

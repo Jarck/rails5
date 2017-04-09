@@ -1,4 +1,4 @@
-<%= simple_form_for @picture, html: { class: "form" } do |f| %>
+<%= simple_form_for [:admin, @picture], html: { class: "form" } do |f| %>
   <%= render "common/error_messages", target: @picture %>
 
   <div class="form-group">

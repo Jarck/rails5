@@ -8,16 +8,6 @@
             <%= link_to(truncate(topic.title, length: 100), topic_path(topic), title: topic.title, :target=> "_blank") %>
           </p>
         </div>
-        <div class="col-md-2">
-          <div>
-          <% if can? :update, topic %>
-            <%= link_to(I18n.t("common.edit"), edit_topic_path(topic), :target=>"_blank", class: "btn btn-sm btn-default") %>
-          <% end %>
-          <% if can? :destroy, topic %>
-            <%= link_to I18n.t("common.delete"), topic_path(topic), method: 'DELETE', data: {confirm: I18n.t("common.confirm")}, class: "btn btn-sm btn-danger" %>
-          <% end %>
-          </div>
-        </div>
       </div>
     </div>
   </div>

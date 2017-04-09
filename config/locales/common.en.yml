@@ -21,6 +21,7 @@
     email: "Email"
     nanem: "User"
     password: "Password"
+    admin_control: "admin console"
     topic_list: "topic list"
     node_list: "node list"
     create_topic: "create topic"
