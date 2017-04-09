@@ -6,6 +6,7 @@ defaults: &defaults
   port: 3000
 
   # 发送邮箱设置
+  email_form: 'Your name <info@you_site.com>'
   email_address: 'smtp.mxhichina.com'
   email_port: 587
   email_domain: 'qiye.aliyun.com/alimail'

@@ -60,6 +60,9 @@ gem 'redis-namespace'
 # Redis 保存阅读量
 gem 'redis-objects'
 
+# friendly id
+gem 'friendly_id', '~> 5.1.0'
+
 # 队列
 gem 'mina-sidekiq', :require => false
 gem 'sidekiq'
@@ -75,6 +78,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
 
   gem 'rspec-rails', '~> 3.5.2'
+  gem 'rspec-collection_matchers'
   gem 'rails-controller-testing'
   gem 'factory_girl_rails'
 end

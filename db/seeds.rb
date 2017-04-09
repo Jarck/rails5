@@ -32,11 +32,11 @@ user.topics.create!([
 ])
 
 Node.create!([
-  {name: 'private', title: '私有', publish: false},
-  {name: 'ruby', title: 'Ruby', publish: true},
-  {name: 'rails', title: 'Rails', publish: true},
-  {name: 'linux', title: 'Linux', publish: true},
-  {name: 'elasticsearch', title: 'Elasticsearch', publish: true}
+  {name: 'private', slug: 'private', title: '私有', publish: false},
+  {name: 'ruby', slug: 'ruby', title: 'Ruby', publish: true},
+  {name: 'rails', slug: 'rails', title: 'Rails', publish: true},
+  {name: 'linux', slug: 'linux', title: 'Linux', publish: true},
+  {name: 'elasticsearch', slug: 'elasticsearch', title: 'Elasticsearch', publish: true}
 ])
 
 puts "seed end"

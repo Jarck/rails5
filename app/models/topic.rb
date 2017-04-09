@@ -1,4 +1,5 @@
 class Topic < ApplicationRecord
+
   include Redis::Objects
   include MarkdownBody
   include SoftDelete

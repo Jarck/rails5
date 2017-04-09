@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170325075536) do
+ActiveRecord::Schema.define(version: 20170409074656) do
 
   create_table "nodes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",                                    comment: "英文名"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20170325075536) do
     t.boolean  "publish",    default: false,              comment: "是否公开，默认false"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.string   "slug"
+    t.index ["slug"], name: "index_nodes_on_slug", unique: true, using: :btree
   end
 
   create_table "pictures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

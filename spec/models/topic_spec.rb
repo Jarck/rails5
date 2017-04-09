@@ -5,22 +5,29 @@ RSpec.describe Topic, type: :model do
   describe 'data valiad' do
     it 'is valid with a user_id, title and body' do
       topic = FactoryGirl.build(:topic)
+
       expect(topic).to be_valid
     end
 
     it 'is invalid without a user_id' do
       topic = FactoryGirl.build(:topic, user_id: nil)
+
       expect(topic).not_to be_valid
+      expect(topic).to have(1).error_on(:user_id)
     end
 
     it 'is invalid without a title' do
       topic = FactoryGirl.build(:topic, title: nil)
+
       expect(topic).not_to be_valid
+      expect(topic).to have(1).error_on(:title)
     end
 
     it 'is invalid without a body' do
       topic = FactoryGirl.build(:topic, body: nil)
+
       expect(topic).not_to be_valid
+      expect(topic).to have(1).error_on(:body)
     end
   end
 
