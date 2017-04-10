@@ -1,6 +1,6 @@
 # rails360
 
-网站：[rails360](rails360.com:8080)
+网站：[rails360](http://rails360.com:8080)
 
 ### 依赖
 
