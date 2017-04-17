@@ -40,7 +40,7 @@ end
 # set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'log')
 set :shared_files, fetch(:shared_files, []).push('config/config.yml', 'config/database.yml', 'config/secrets.yml', 'config/unicorn.rb', 'config/initializers/devise.rb')
 
-set :shared_paths, ['tmp/sockets', 'tmp/pids', 'log', 'public/uploads/']
+set :shared_dirs, fetch(:shared_dirs, []).push('public/uploads', 'tmp/sockets', 'tmp/pids', 'log')
 
 # 设置sidekiq的进程
 set :sidekiq_pid, "#{fetch(:deploy_to)}/tmp/pids/sidekiq.pid"
@@ -80,7 +80,8 @@ task :setup do
   command %[touch "#{fetch(:deploy_to)}/shared/config/unicorn.rb"]
   command %[chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/config"]
 
-  command %[mkdir -p "/home/jarck/rails360/shared/public/uploads"]
+  command %[mkdir "#{fetch(:deploy_to)}/shared/public/uploads"]
+  command %[chmod g+rx,u+rwx "#{fetch(:deploy_to)}/shared/public/uploads"]
 end
 
 desc "Deploys the current version to the server."
