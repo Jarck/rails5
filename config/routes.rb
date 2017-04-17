@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  use_doorkeeper do
+    controllers :applications => 'oauth/applications'
+  end
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
@@ -31,4 +35,8 @@ Rails.application.routes.draw do
   get 'notice' => 'notice#index'
 
   root to: "home#index"
+
+  # API
+  mount ApplicationAPI => '/api'
+  mount GrapeSwaggerRails::Engine => '/docs'
 end

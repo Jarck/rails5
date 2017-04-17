@@ -1,9 +1,10 @@
 FactoryGirl.define do
   factory :topic do
     association :user
-    node_id 1
-    title 'test'
-    body '<p>test</p>'
+    association :node
+
+    sequence(:title) { |n| "title#{n}" }
+    sequence(:body)  { |n| "body#{n}" }
 
     factory :text_body do
       body 'test'

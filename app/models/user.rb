@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :roles, :through => :users_roles
   has_many :topics
   has_many :pictures
+  has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
   ALLOW_LOGIN_CHARS_REGEXP = /\A\w+\z/
   validates :name, format: { with: ALLOW_LOGIN_CHARS_REGEXP, message: '只允许数字、大小写字母和下划线' },

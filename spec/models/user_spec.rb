@@ -4,8 +4,8 @@ RSpec.describe User, type: :model do
 
   describe 'roles' do
 
-    context 'when is a new user' do
-      it 'has a role with member' do
+    context 'when with new user' do
+      it 'has role with member' do
         user = FactoryGirl.build(:user)
         user.save
 
@@ -13,8 +13,8 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'assign a role as admin' do
-      it 'assign a role with admin' do
+    context 'assign role as admin' do
+      it 'assign role with admin' do
         user = FactoryGirl.build(:user)
         user.save
 

@@ -63,15 +63,32 @@ gem 'redis-objects'
 # friendly id
 gem 'friendly_id', '~> 5.1.0'
 
-# 队列
+# Sidekiq 队列
 gem 'mina-sidekiq', :require => false
 gem 'sidekiq'
 # Sidekiq Web
 gem 'sinatra', require: nil
 
 # Use Unicorn as the app server
-gem "mina-unicorn", :require => false
-gem "unicorn"
+gem 'mina-unicorn', :require => false
+gem 'unicorn'
+
+# OAuth 2.0
+gem 'doorkeeper', github: 'doorkeeper-gem/doorkeeper'
+gem 'doorkeeper-i18n'
+
+# API
+gem 'grape'
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'grape-active_model_serializers'
+
+# API 文档
+gem 'grape-swagger'
+gem 'grape-swagger-rails'
+
+# for API 跨域
+gem 'rack-cors', require: 'rack/cors'
+gem 'rack-utf8_sanitizer'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -99,6 +116,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # monitor 监控
+  gem 'rack-mini-profiler', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

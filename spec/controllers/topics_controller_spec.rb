@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TopicsController, type: :controller  do
+RSpec.describe TopicsController, type: :controller do
 
   let(:user) { FactoryGirl.create(:user) }
   let(:topic) { FactoryGirl.create(:topic, user: user) }
@@ -17,7 +17,7 @@ RSpec.describe TopicsController, type: :controller  do
 
   describe "GET #show" do
     context "unsign in" do
-      it 'is allow to show without sign in' do
+      it 'is allow to show with unsign in' do
         get :show, params: {id: topic.id}
 
         expect(response).to be_success

@@ -18,6 +18,9 @@ module Rails5
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :token]
 
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+
     config.active_job.queue_adapter = :sidekiq
 
     config.generators do |g|

@@ -9,6 +9,9 @@ class Topic < ApplicationRecord
 
   validates :user_id, :title, :body, presence: true
 
+  # 不获取分类为'private'的文章
+  scope :without_private, -> { joins(:node).where("nodes.name != 'private'") }
+
   # 阅读量
   counter :hits, default: 0
 
