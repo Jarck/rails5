@@ -25,7 +25,7 @@ rails s
 或者修改 `config/deploy.rb` 配置文件，使用mina自动部署
 
 ``` 
-mina init
+mina setup
 mina deploy
 ```
 
