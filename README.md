@@ -1,18 +1,24 @@
 # rails360
 
-网站：[rails360](http://rails360.com:8080)
+网站：[rails360](http://www.rails360.com:8080)
 
 ### 依赖
 
-* rails 5.0
-* ruby 2.4
-* mysql 5.7
-* redis
-* imagemagick 
+* Rails 5.0
+* Ruby 2.4
+* MySQL 5.7
+* Redis
+* ImageMagick 
+
+**---- branch elastic ----**
+
+* ElasticSearch 5.*
 
 ### 运行
 
-mysql、redis服务必须先启动好。
+MySQL、Redis服务必须先启动好。
+
+如果是branch elastic的话，还需要启动ElasticSearch服务。
 
 ```
 bundle install
@@ -37,10 +43,4 @@ bundle exec rspec
 
 ### API接口文档
 
-**http://rails360:8080/docs**
-
-### TODO
-
-* 优化管理页面
-* 添加全文检索功能
-* ...
+[rails360 API](http://www.rails360.com:8080/docs)
