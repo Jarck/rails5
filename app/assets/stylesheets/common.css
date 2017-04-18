@@ -43,3 +43,8 @@ abbr[title] {
 .create_bar {
   float: right;
 }
+
+.search-results .result em {
+  color: #EB5424;
+  font-style: normal;
+}

@@ -33,6 +33,15 @@
             </ul>
 
             <%= render "common/user_nav" %>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="nav-search hidden-xs">
+                <form class="navbar-form form-search active" action="/search" method="GET">
+                  <div class="form-group">
+                    <input class="form-control" type="text" name="q" value="<%= params[:q] %>" placeholder="搜索本站内容">
+                  </div>
+                </form>
+              </li>
+            </ul>
           </div>
 
         </div>

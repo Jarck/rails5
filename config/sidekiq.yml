@@ -6,4 +6,5 @@
 :logfile: log/sidekiq.log
 :queues:
   - [mailers, 5]
+  - [search_indexer, 10]
   - default

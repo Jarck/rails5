@@ -1,3 +1,4 @@
+# 软删除
 module SoftDelete
   extend ActiveSupport::Concern
 

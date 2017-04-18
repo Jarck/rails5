@@ -4,7 +4,7 @@ class TopicsController < ApplicationController
     # 只获取所有可见的文章信息
     node_ids = Node.where(publish: true).pluck(:id)
 
-    @topics = Topic.includes(:node).where("node_id in (:node_ids)", node_ids: node_ids).paginate(page: params[:page], :per_page => 10).order('created_at DESC')
+    @topics = Topic.includes(:node).where("node_id in (:node_ids)", node_ids: node_ids).paginate(page: params[:page], per_page: 10).order('created_at DESC')
   end
 
   def show
